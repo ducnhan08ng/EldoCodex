@@ -1,0 +1,291 @@
+:root {
+    --accent-primary: #f59e0b;
+    --accent-secondary: #ef4444;
+    --accent-glow: rgba(245, 158, 11, 0.35);
+    --bg-radial-1: rgba(245, 158, 11, 0.16);
+    --bg-radial-2: rgba(220, 38, 38, 0.12);
+    --border-main: rgba(251, 191, 36, 0.55);
+    --corner-top: #fbbf24;
+    --corner-bottom: #f97316;
+    --title-grad: linear-gradient(90deg, #ffffff 0%, #fef3c7 45%, #fbbf24 100%);
+    --rank-top-badge: linear-gradient(135deg, #f59e0b, #ef4444);
+}
+
+/* Theme 2: Tím Cyberpunk */
+[data-theme="cyberpunk"] {
+    --accent-primary: #e879f9;
+    --accent-secondary: #38bdf8;
+    --accent-glow: rgba(217, 70, 239, 0.35);
+    --bg-radial-1: rgba(217, 70, 239, 0.18);
+    --bg-radial-2: rgba(56, 189, 248, 0.14);
+    --border-main: rgba(232, 121, 249, 0.55);
+    --corner-top: #e879f9;
+    --corner-bottom: #38bdf8;
+    --title-grad: linear-gradient(90deg, #ffffff 0%, #fae8ff 45%, #e879f9 100%);
+    --rank-top-badge: linear-gradient(135deg, #e879f9, #38bdf8);
+}
+
+/* Theme 3: Xanh Esport */
+[data-theme="esport"] {
+    --accent-primary: #38bdf8;
+    --accent-secondary: #10b981;
+    --accent-glow: rgba(56, 189, 248, 0.35);
+    --bg-radial-1: rgba(56, 189, 248, 0.18);
+    --bg-radial-2: rgba(16, 185, 129, 0.14);
+    --border-main: rgba(56, 189, 248, 0.55);
+    --corner-top: #38bdf8;
+    --corner-bottom: #10b981;
+    --title-grad: linear-gradient(90deg, #ffffff 0%, #e0f2fe 45%, #38bdf8 100%);
+    --rank-top-badge: linear-gradient(135deg, #38bdf8, #10b981);
+}
+
+/* Theme 4: Đỏ Huyết Chiến */
+[data-theme="blood"] {
+    --accent-primary: #f43f5e;
+    --accent-secondary: #f97316;
+    --accent-glow: rgba(244, 63, 94, 0.4);
+    --bg-radial-1: rgba(244, 63, 94, 0.2);
+    --bg-radial-2: rgba(249, 115, 22, 0.15);
+    --border-main: rgba(244, 63, 94, 0.6);
+    --corner-top: #f43f5e;
+    --corner-bottom: #f97316;
+    --title-grad: linear-gradient(90deg, #ffffff 0%, #ffe4e6 45%, #f43f5e 100%);
+    --rank-top-badge: linear-gradient(135deg, #f43f5e, #f97316);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #03050a;
+    color: #f8fafc;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.font-gaming {
+    font-family: 'Rajdhani', 'Be Vietnam Pro', sans-serif;
+}
+
+/* ========================================================================= */
+/* ROLE CONTROL: USER VS ADMIN                                               */
+/* ========================================================================= */
+body.role-user .admin-only {
+    display: none !important;
+}
+
+body.role-admin .user-only {
+    display: none !important;
+}
+
+/* Stage container for 16:9 canvas */
+#stage-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: calc(100vh - 65px);
+    overflow: hidden;
+    position: relative;
+    padding: 20px 10px;
+}
+
+#capture-area {
+    width: 1280px;
+    height: 720px;
+    aspect-ratio: 16 / 9;
+    flex-shrink: 0;
+    transform-origin: center center;
+    background-color: #090d16;
+    background-image: 
+        radial-gradient(circle at 12% 15%, var(--bg-radial-1) 0%, transparent 48%),
+        radial-gradient(circle at 88% 85%, var(--bg-radial-2) 0%, transparent 48%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+    border: 2px solid var(--border-main);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 0.9), 0 0 30px -10px var(--accent-glow);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 22px 30px 18px 30px;
+    border-radius: 18px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Transparent export state */
+#capture-area.transparent-bg {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.theme-title-text {
+    background: var(--title-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.corner-tl { border-top: 4px solid var(--corner-top); border-left: 4px solid var(--corner-top); }
+.corner-tr { border-top: 4px solid var(--corner-top); border-right: 4px solid var(--corner-top); }
+.corner-bl { border-bottom: 4px solid var(--corner-bottom); border-left: 4px solid var(--corner-bottom); }
+.corner-br { border-bottom: 4px solid var(--corner-bottom); border-right: 4px solid var(--corner-bottom); }
+
+/* ========================================================================= */
+/* HERO CARDS & INTERACTION                                                  */
+/* ========================================================================= */
+.hero-card {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-card:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+
+.hero-card .hero-actions {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+/* In admin mode, show action buttons on hover */
+body.role-admin .hero-card:hover .hero-actions {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Codex Cards */
+.codex-card {
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.codex-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(245, 158, 11, 0.7);
+    box-shadow: 0 12px 30px -5px rgba(245, 158, 11, 0.25);
+}
+
+/* Exporting state hides management overlays */
+body.exporting .hero-actions,
+body.exporting .no-export {
+    display: none !important;
+}
+
+.rank-1-row {
+    background: linear-gradient(90deg, rgba(245, 158, 11, 0.24) 0%, rgba(234, 88, 12, 0.12) 55%, rgba(15, 23, 42, 0.88) 100%);
+    border: 1.5px solid rgba(251, 191, 36, 0.75);
+    box-shadow: 0 4px 22px -3px rgba(245, 158, 11, 0.3);
+}
+
+.rank-2-row {
+    background: linear-gradient(90deg, rgba(236, 72, 153, 0.22) 0%, rgba(168, 85, 247, 0.12) 55%, rgba(15, 23, 42, 0.88) 100%);
+    border: 1.5px solid rgba(244, 114, 182, 0.65);
+    box-shadow: 0 4px 20px -3px rgba(236, 72, 153, 0.25);
+}
+
+.rank-3-row {
+    background: linear-gradient(90deg, rgba(139, 92, 246, 0.22) 0%, rgba(59, 130, 246, 0.12) 55%, rgba(15, 23, 42, 0.88) 100%);
+    border: 1.5px solid rgba(167, 139, 250, 0.65);
+    box-shadow: 0 4px 20px -3px rgba(139, 92, 246, 0.25);
+}
+
+.rank-other-row {
+    background: linear-gradient(90deg, rgba(51, 65, 85, 0.42) 0%, rgba(15, 23, 42, 0.85) 100%);
+    border: 1px solid rgba(100, 116, 139, 0.4);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #090d16;
+}
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+/* Modals */
+.modal-overlay {
+    background: rgba(3, 5, 10, 0.88);
+    backdrop-filter: blur(10px);
+}
+
+/* Glowing text and badges */
+.glow-gold {
+    text-shadow: 0 0 12px rgba(245, 158, 11, 0.6);
+}
+.glow-pink {
+    text-shadow: 0 0 12px rgba(236, 72, 153, 0.6);
+}
+.glow-purple {
+    text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+}
+
+/* Tab Active Transitions */
+.tab-btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.tab-btn.active {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(234, 88, 12, 0.15));
+    border-color: rgba(245, 158, 11, 0.8);
+    color: #fbbf24;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+}
+
+/* Click hint tooltip */
+.click-hint {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+.hero-card:hover .click-hint {
+    opacity: 1;
+}
+
+
+/* ========================================================================== */
+/* EXCLUSIVE ITEMS & SET ABILITY STYLES                                      */
+/* ========================================================================== */
+.item-a-glow {
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.25);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.item-a-glow:hover {
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.5), inset 0 0 15px rgba(245, 158, 11, 0.2);
+    transform: translateY(-2px);
+}
+
+.set-gold-gradient {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(234, 88, 12, 0.1) 50%, rgba(15, 23, 42, 0.9) 100%);
+}
+
+.set-max-glow {
+    animation: setPulse 3s infinite alternate;
+}
+
+@keyframes setPulse {
+    0% {
+        box-shadow: 0 0 10px rgba(245, 158, 11, 0.2);
+        border-color: rgba(245, 158, 11, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+        border-color: rgba(251, 191, 36, 0.9);
+    }
+}

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<!-- 🔒 PUBLIC PRODUCTION BUILD — Clean & Secure (All admin components fully stripped) -->
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Dorado M — Benchmark Sát Thương 60s & Tra Cứu Tướng Game (104+)</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Be Vietnam Pro & Rajdhani -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom Esports Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="gold" class="role-user select-none bg-[#03050a] text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-4 right-4 z-50 transform transition-all duration-300 translate-y-[-160%] opacity-0 bg-emerald-600 text-white px-4 py-2.5 rounded-xl shadow-2xl border border-emerald-400/50 flex items-center gap-2 text-sm font-bold">
+        <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        <span id="toast-msg">Thông báo thành công!</span>
+    </div>
+
+    <!-- MAIN APP NAVIGATION / CONTROL BAR -->
+    <header class="w-full bg-slate-950/95 border-b border-slate-800 px-4 py-2 flex flex-wrap items-center justify-between gap-3 z-40 shrink-0 sticky top-0 backdrop-blur-md">
+        <!-- Brand & Nav Tabs -->
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3 py-0.5">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/30 border border-amber-300/40 shrink-0">
+                    ⚡
+                </div>
+                <div>
+                    <span class="text-xl md:text-2xl font-black tracking-wider uppercase text-transparent bg-clip-text bg-gradient-to-r from-white via-amber-200 to-amber-400 font-gaming block leading-none drop-shadow-[0_2px_10px_rgba(245,158,11,0.4)]">
+                        EL DORADO M
+                    </span>
+                    <span class="text-xs text-amber-400 font-extrabold uppercase tracking-[0.2em] block mt-0.5 font-gaming">
+                        BENCHMARK & CODEX 2026
+                    </span>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <nav class="flex items-center gap-1.5 bg-slate-900/90 border border-slate-800 p-1 rounded-xl">
+                <button id="nav-btn-benchmark" onclick="switchTab('benchmark')" class="nav-tab-btn tab-btn active px-3 py-1.5 rounded-lg text-xs font-bold transition flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                    🏆 BXH Benchmark
+                </button>
+                <button id="nav-btn-codex" onclick="switchTab('codex')" class="nav-tab-btn tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    📖 Tra Cứu Characters
+                </button>
+                <button id="nav-btn-exclusive" onclick="switchTab('exclusive')" class="nav-tab-btn tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    🛡️ Exclusive Item
+                </button>
+                <button id="nav-btn-contact" onclick="switchTab('contact')" class="nav-tab-btn tab-btn px-3 py-1.5 rounded-lg text-xs font-bold transition text-slate-300 hover:bg-slate-800 flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    📬 Liên Hệ
+                </button>
+            </nav>
+        </div>
+        </div>
+    </header>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 1: BENCHMARK 16:9 CANVAS VIEW                                         -->
+    <!-- ========================================================================= -->
+    <main id="tab-content-benchmark" class="tab-content flex-1 flex flex-col items-center justify-center p-2">
+        <div id="stage-wrapper">
+            <!-- 16:9 FIXED CANVAS (1280x720 base -> exports at 1.5x = 1920x1080) -->
+            <div id="capture-area">
+                <!-- Esport Corner Brackets -->
+                <div class="pointer-events-none absolute top-0 left-0 w-12 h-12 corner-tl rounded-tl-[16px]"></div>
+                <div class="pointer-events-none absolute top-0 right-0 w-12 h-12 corner-tr rounded-tr-[16px]"></div>
+                <div class="pointer-events-none absolute bottom-0 left-0 w-12 h-12 corner-bl rounded-bl-[16px]"></div>
+                <div class="pointer-events-none absolute bottom-0 right-0 w-12 h-12 corner-br rounded-br-[16px]"></div>
+
+                <!-- 1. HEADER SECTION -->
+                <header class="flex items-center justify-between pb-2.5 border-b border-slate-700/75 shrink-0">
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-11 h-11 rounded-xl bg-gradient-to-br from-amber-400 via-orange-500 to-red-600 flex items-center justify-center text-slate-950 shadow-lg shadow-amber-500/30 shrink-0">
+                            <!-- Trophy / Crown Icon -->
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M19 5h-2V3H7v2H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94.63 1.5 1.98 2.63 3.61 2.96V19H7v2h10v-2h-4v-3.1c1.63-.33 2.98-1.46 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z"></path></svg>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2 mb-0.5">
+                                <h1 class="text-[32px] font-black tracking-tight uppercase theme-title-text leading-none">
+                                    BXH SÁT THƯƠNG CLOUD GARDEN
+                                </h1>
+                                <span class="px-2 py-0.5 rounded bg-red-500/20 border border-red-400/50 text-red-300 text-[11px] font-black uppercase tracking-wider">
+                                    LIVE BENCHMARK
+                                </span>
+                            </div>
+                            <p class="text-xs font-extrabold uppercase tracking-wider text-amber-300/95">
+                                Sát thương được gây ra ở Cloud Garen - Thực hiện bởi Minh Hùng
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right Header Record Badge -->
+                    <div class="flex items-center gap-3 bg-slate-900/90 border border-slate-700/80 px-3.5 py-1.5 rounded-xl shadow-lg">
+                        <div class="text-right">
+                            <div class="text-[9.5px] font-extrabold uppercase tracking-widest text-slate-400">KỶ LỤC SÁT THƯƠNG 60S</div>
+                            <div id="meta-record-score" class="font-gaming text-2xl font-extrabold text-amber-400 leading-none mt-0.5">18.813M ĐIỂM</div>
+                        </div>
+                        <div class="h-8 w-8 rounded-lg bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-amber-400">
+                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"></path></svg>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- 2. TWO-COLUMN MAIN BODY -->
+                <main class="flex-1 flex gap-5 my-2.5 min-h-0">
+                    <!-- LEFT COLUMN (58%): HEROES DAMAGE BENCHMARK LIST -->
+                    <section class="w-[58%] flex flex-col justify-between gap-1.5 min-h-0 overflow-hidden">
+                        <div class="flex items-center justify-between px-1 shrink-0">
+                            <span id="hero-count-label" class="text-xs font-black uppercase tracking-wider text-slate-300 flex items-center gap-2">
+                                <span class="w-2 h-3.5 rounded-sm bg-amber-400 inline-block"></span>
+                                BẢNG XẾP HẠNG SÁT THƯƠNG CHI TIẾT
+                            </span>
+                            <span class="text-[11px] font-bold text-slate-400">% SO VỚI TOP 1</span>
+                        </div>
+
+                        <!-- Dynamic Hero Cards List Container -->
+                        <div id="benchmark-hero-list" class="flex-1 flex flex-col justify-between gap-1.5 overflow-hidden">
+                            <!-- Populated dynamically via renderBenchmark() -->
+                        </div>
+                    </section>
+
+                    <!-- RIGHT COLUMN (42%): META OVERVIEW & SUMMARY REVIEW CARDS -->
+                    <aside class="w-[42%] flex flex-col justify-between gap-2 shrink-0">
+                        <div class="flex items-center justify-between px-1 shrink-0">
+                            <span class="text-xs font-black uppercase tracking-wider text-amber-300 flex items-center gap-2">
+                                <span class="w-2 h-3.5 rounded-sm bg-purple-400 inline-block"></span>
+                                TÓM TẮT REVIEW & ĐÁNH GIÁ META
+                            </span>
+                            <span class="text-[11px] font-bold text-slate-400">HIGHLIGHT</span>
+                        </div>
+
+                        <!-- Dynamic Review Cards Container -->
+                        <div id="review-cards-list" class="flex-1 flex flex-col justify-between gap-2 overflow-hidden">
+                            <!-- Populated dynamically via renderReviewCards() -->
+                        </div>
+                    </aside>
+                </main>
+
+                <!-- 3. FOOTER SECTION INSIDE 16:9 FRAME -->
+                <footer class="pt-2 border-t border-slate-800/90 flex items-center justify-between text-xs text-slate-400 shrink-0">
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="font-bold text-slate-300 tracking-wide text-[11px]">
+                            Dữ liệu thực tế từ bài test Cloud Garden 60 giây • Cập nhật Meta 2026 (Càng nạp càng mạnh)
+                        </span>
+                    </div>
+                    <div class="font-gaming text-xs font-extrabold uppercase tracking-widest text-amber-300/90 text-right">
+                        TEST 60 GIÂY • CLOUD GARDEN • LV 110 • ITEM A ĐỘC QUYỀN • BUFF XUẤT QUÂN THỎ NGỌC
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </main>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 2: HERO CODEX / TRA CỨU TƯỚNG TỪ 104 ĐỔ ĐI (GAME MIN CLIENT)          -->
+    <!-- ========================================================================= -->
+    <section id="tab-content-codex" class="tab-content hidden flex-1 p-6 max-w-7xl mx-auto w-full">
+        <!-- Codex Header & Search -->
+        <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-950/80 border border-slate-800 p-5 rounded-2xl shadow-xl">
+            <div>
+                <h2 class="text-2xl font-black text-white font-gaming tracking-wide uppercase flex items-center gap-2">
+                    <span class="w-3 h-6 rounded-sm bg-gradient-to-b from-amber-400 to-orange-500 inline-block"></span>
+                    THƯ VIỆN & TRA CỨU TƯỚNG GAME (FULL DÀN 8★ VÀ 9★)
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">
+                    Dữ liệu trích xuất chính thức từ client game El Dorado (min1113.js) gồm toàn bộ dàn tướng 8 sao (24 tướng) và 9 sao (8 tướng). Tích hợp tra cứu Trang Bị Độc Quyền & Set Ability! Click vào bất kỳ tướng nào để xem chi tiết.
+                </p>
+            </div>
+
+            <!-- Search box -->
+            <div class="flex items-center gap-3">
+                <div class="relative w-72">
+                    <input type="text" oninput="searchCodex(this.value)" placeholder="Tìm kiếm tướng, ID, kỹ năng..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 transition">
+                    <svg class="w-4 h-4 text-slate-400 absolute right-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter pills -->
+        <div class="flex flex-wrap items-center gap-2 mb-6">
+            <button onclick="filterCodex('all', this)" class="codex-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-amber-500 text-slate-950">
+                Tất Cả (32 Tướng)
+            </button>
+            <button onclick="filterCodex('8star', this)" class="codex-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                ⭐ Full 8 Sao (24 Tướng)
+            </button>
+            <button onclick="filterCodex('9star', this)" class="codex-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                🌟 Thần 9 Sao (8 Tướng)
+            </button>
+            <button onclick="filterCodex('exclusive', this)" class="codex-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-amber-300 hover:bg-slate-700 border border-amber-500/30">
+                🛡️ Có Item Độc Quyền (6 Tướng)
+            </button>
+            <button onclick="filterCodex('armor', this)" class="codex-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                🛡️ Hệ Giáp Sắt (Armor Hit)
+            </button>
+            <button onclick="filterCodex('wide', this)" class="codex-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                💥 Sát Thương Lan (Wide)
+            </button>
+        </div>
+
+        <!-- Codex Heroes Grid -->
+        <div id="codex-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Populated dynamically via renderCodex() -->
+        </div>
+    </section>
+
+        <!-- ========================================================================= -->
+    <!-- TAB 3: TRA CỨU ITEM ĐỘC QUYỀN & SET ABILITY (EXCLUSIVE EQUIPMENT)           -->
+    <!-- ========================================================================= -->
+    <section id="tab-content-exclusive" class="tab-content hidden flex-1 p-6 max-w-7xl mx-auto w-full">
+        <!-- Exclusive Header -->
+        <div class="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-slate-950/80 border border-slate-800 p-5 rounded-2xl shadow-xl">
+            <div>
+                <h2 class="text-2xl font-black text-amber-400 font-gaming tracking-wide uppercase flex items-center gap-2">
+                    <span class="w-3 h-6 rounded-sm bg-gradient-to-b from-amber-400 to-orange-500 inline-block"></span>
+                    HỆ THỐNG TRANG BỊ ĐỘC QUYỀN & KÍCH HOẠT SET ABILITY
+                </h2>
+                <p class="text-xs text-slate-300 mt-1">
+                    Trang bị độc quyền (Exclusive Items Bậc A) chỉ dành riêng cho từng vị tướng tương ứng. Mỗi bộ gồm 4 món: <strong class="text-amber-300">Nón (Casque)</strong>, <strong class="text-amber-300">Vũ Khí (Weapon)</strong>, <strong class="text-amber-300">Áo Giáp (Armor)</strong>, <strong class="text-amber-300">Giày (Shoes)</strong>. Khi mang đủ 1, 2, 3 và 4 món sẽ mở khóa các tầng hiệu ứng Set Effect cực mạnh!
+                </p>
+            </div>
+
+            <!-- Quick Jump / Search -->
+            <div class="flex items-center gap-2">
+                <span class="text-xs text-slate-400 font-bold whitespace-nowrap">Chọn Tướng:</span>
+                <select id="exclusive-hero-filter" onchange="filterExclusiveHero(this.value)" class="bg-slate-900 border border-slate-700 rounded-xl px-3 py-2 text-xs text-amber-300 font-bold focus:outline-none focus:border-amber-400">
+                    <option value="all">🌟 Xem Toàn Bộ 6 Bộ Trang Bị</option>
+                    <option value="115">🐰 Lunar Rabbit (Ngọc Thố #115)</option>
+                    <option value="112">🥷 Black Raven (Hắc Nha #112)</option>
+                    <option value="107">🐎 Flame Cavalier (Liệt Diễm #107)</option>
+                    <option value="106">🐍 Spirit Serpent (Linh Xà #106)</option>
+                    <option value="105">⚔️ Mukhyang (Mặc Hương #105)</option>
+                    <option value="104">👑 Ogong (Tôn Ngộ Không #104)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Filter tabs per hero -->
+        <div class="flex flex-wrap items-center gap-2 mb-6">
+            <button onclick="filterExclusiveSets('all', this)" class="exclusive-filter-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition bg-amber-500 text-slate-950">
+                Tất Cả 6 Bộ Trang Bị
+            </button>
+            <button onclick="filterExclusiveSets('115', this)" class="exclusive-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                🌙 Ngọc Thố (#115)
+            </button>
+            <button onclick="filterExclusiveSets('112', this)" class="exclusive-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                🦅 Hắc Nha (#112)
+            </button>
+            <button onclick="filterExclusiveSets('107', this)" class="exclusive-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                🔥 Liệt Diễm Kỵ Sĩ (#107)
+            </button>
+            <button onclick="filterExclusiveSets('106', this)" class="exclusive-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                ❄️ Linh Xà (#106)
+            </button>
+            <button onclick="filterExclusiveSets('105', this)" class="exclusive-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                🪓 Mặc Hương (#105)
+            </button>
+            <button onclick="filterExclusiveSets('104', this)" class="exclusive-filter-btn px-3 py-1.5 rounded-xl text-xs font-bold transition bg-slate-800 text-slate-300 hover:bg-slate-700">
+                🐒 Tôn Ngộ Không (#104)
+            </button>
+        </div>
+
+        <!-- Sets Container Grid -->
+        <div id="exclusive-sets-container" class="space-y-8">
+            <!-- Populated dynamically via renderExclusiveSets() -->
+        </div>
+    </section>
+
+<!-- ========================================================================= -->
+    <!-- POPUP MODAL: CHI TIẾT TƯỚNG TOÀN DIỆN (HIỂN THỊ ĐẦY ĐỦ TAGS & KỸ NĂNG)    -->
+    <!-- ========================================================================= -->
+    <div id="hero-detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay overflow-y-auto">
+        <div class="bg-slate-900 border-2 border-amber-500/80 rounded-2xl w-full max-w-2xl shadow-2xl p-6 relative my-8 max-h-[90vh] flex flex-col">
+            <!-- Header: Avatar, Name, Star, Tier & Close Button -->
+            <div class="flex items-start justify-between pb-4 border-b border-slate-800 shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-16 h-16 rounded-2xl overflow-hidden bg-slate-950 border-2 border-amber-500/60 shadow-lg shadow-amber-500/20 shrink-0">
+                        <img id="detail-hero-avatar" src="" alt="Avatar" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h2 id="detail-hero-name" class="text-2xl font-black text-white font-gaming tracking-wide"></h2>
+                            <span id="detail-hero-star" class="px-2 py-0.5 rounded bg-amber-500/25 text-amber-300 font-extrabold text-xs border border-amber-400/40"></span>
+                            <span id="detail-hero-tier" class="px-2.5 py-0.5 rounded bg-gradient-to-r from-amber-400 to-orange-500 text-slate-950 font-black text-xs uppercase tracking-wider"></span>
+                        </div>
+                        <p id="detail-hero-title" class="text-xs text-amber-300 font-bold mt-0.5"></p>
+                        <p id="detail-hero-id" class="text-[11px] text-slate-400 font-medium"></p>
+                    </div>
+                </div>
+
+                <button onclick="closeHeroDetailModal()" class="text-slate-400 hover:text-white p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Scrollable Content Body -->
+            <div class="flex-1 overflow-y-auto space-y-4 my-4 pr-1 text-xs">
+                <!-- 1. Benchmark Damage Box -->
+                <div id="detail-damage-container" class="p-3.5 rounded-xl bg-gradient-to-r from-amber-500/15 via-orange-500/10 to-slate-950 border border-amber-400/40 flex flex-col gap-2">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">SÁT THƯƠNG TEST 60S CLOUD GARDEN</span>
+                            <span id="detail-hero-damage" class="font-gaming text-2xl font-black text-amber-300 leading-none"></span>
+                        </div>
+                        <div class="text-right">
+                            <span id="detail-hero-rank" class="px-3 py-1 rounded-full bg-slate-900 border border-amber-400/50 text-amber-300 font-bold text-xs inline-block"></span>
+                        </div>
+                    </div>
+                    <div class="w-full h-2.5 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-amber-500/30">
+                        <div id="detail-hero-bar" class="h-full rounded-full bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 shadow-[0_0_10px_rgba(245,158,11,0.7)]" style="width: 0%;"></div>
+                    </div>
+                </div>
+
+                <!-- 2. FULL TAGS & HUY HIỆU (ĐẦY ĐỦ, KHÔNG CẮT BỚT DÒNG) -->
+                <div>
+                    <span class="text-[11px] font-black uppercase text-amber-300 tracking-wider block mb-2 flex items-center gap-1.5">
+                        🏷️ TOÀN BỘ HUY HIỆU & ĐẶC TÍNH (FULL TAGS):
+                    </span>
+                    <div id="detail-tags-container" class="flex flex-wrap gap-1.5">
+                        <!-- Populated via showHeroDetail() -->
+                    </div>
+                </div>
+
+                <!-- 3. In-Game Combat Stats Table -->
+                <div id="detail-stats-container">
+                    <span class="text-[11px] font-black uppercase text-sky-300 tracking-wider block mb-2 flex items-center gap-1.5">
+                        ⚔️ CHỈ SỐ CHIẾN ĐẤU THỰC TẾ (CLIENT MIN1113):
+                    </span>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Tấn Công (AP)</span>
+                            <span id="detail-stat-ap" class="font-gaming text-amber-400 font-extrabold text-sm"></span>
+                        </div>
+                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Máu (HP)</span>
+                            <span id="detail-stat-hp" class="font-gaming text-rose-400 font-extrabold text-sm"></span>
+                        </div>
+                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Đặc Tính</span>
+                            <span id="detail-stat-feature" class="font-bold text-slate-200 text-xs"></span>
+                        </div>
+                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Kiểu Đánh</span>
+                            <span id="detail-stat-type" class="font-bold text-slate-200 text-xs"></span>
+                        </div>
+                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Tầm Đánh</span>
+                            <span id="detail-stat-len" class="font-bold text-slate-200 text-xs"></span>
+                        </div>
+                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Tốc Đánh / Chạy</span>
+                            <span id="detail-stat-speed" class="font-bold text-slate-200 text-xs"></span>
+                        </div>
+                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Khoáng Sản Xuất</span>
+                            <span id="detail-stat-nm" class="font-bold text-emerald-400 text-xs font-gaming"></span>
+                        </div>
+                        <div class="bg-slate-950/80 p-2.5 rounded-xl border border-slate-800">
+                            <span class="text-[10px] text-slate-400 uppercase font-bold block">Đa Kích (Multi-Hit)</span>
+                            <span id="detail-stat-multihit" class="font-bold text-pink-400 text-xs"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Innate & Special Abilities with Explanations -->
+                <!-- 3.5. BỘ TRANG BỊ ĐỘC QUYỀN & SET ABILITY (HIỂN THỊ NẾU TƯỚNG CÓ TRANG BỊ ĐỘC QUYỀN) -->
+                <div id="detail-exclusive-container" class="hidden p-4 rounded-2xl bg-gradient-to-b from-amber-500/15 via-slate-950 to-slate-950 border border-amber-500/50 space-y-3">
+                    <div class="flex items-center justify-between pb-2 border-b border-amber-500/30">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">🛡️</span>
+                            <span class="font-gaming text-amber-300 font-black text-xs tracking-wider uppercase">BỘ TRANG BỊ ĐỘC QUYỀN & SET ABILITY</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-amber-500/25 text-amber-300 text-[10px] font-black border border-amber-400/40">4 MÓN BẬC A</span>
+                    </div>
+
+                    <!-- 4 Ô Trang bị -->
+                    <div id="detail-exclusive-items-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <!-- Injected via showHeroDetail() -->
+                    </div>
+
+                    <!-- 4 Mốc Set Ability -->
+                    <div id="detail-exclusive-sets-list" class="space-y-1.5 pt-1">
+                        <!-- Injected via showHeroDetail() -->
+                    </div>
+                </div>
+
+                <div id="detail-abilities-container" class="space-y-3">
+                    <!-- Populated via showHeroDetail() -->
+                </div>
+
+                <!-- 5. Meta Review Commentary -->
+                <div class="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <span class="text-[11px] font-black uppercase text-amber-300 tracking-wider block mb-1 flex items-center gap-1.5">
+                        📝 ĐÁNH GIÁ META & PHÂN TÍCH GAMEPLAY:
+                    </span>
+                    <p id="detail-hero-desc" class="text-xs text-slate-200 leading-relaxed font-medium"></p>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="flex items-center justify-between pt-3 border-t border-slate-800 shrink-0">
+<div class="ml-auto">
+                    <button onclick="closeHeroDetailModal()" class="px-5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold transition">
+                        Đóng (ESC)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!-- ========================================================================= -->
+    <div id="hero-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-slate-900 border-2 border-amber-500/80 rounded-2xl w-full max-w-lg shadow-2xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 id="modal-hero-title" class="text-lg font-black text-amber-400 font-gaming uppercase">
+                    Thêm Tướng Mới Vào BXH
+                </h3>
+                <button onclick="closeHeroModal()" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Form Content -->
+            <div class="space-y-3.5 text-xs">
+                <!-- Preset from Game -->
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Nạp nhanh từ Tướng Game (104 - 117):</label>
+                    <select id="hero-preset-select" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-amber-300 font-bold focus:outline-none focus:border-amber-400">
+                        <!-- Populated via populatePresetSelect() -->
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Tên Tướng: *</label>
+                        <input id="hero-form-name" type="text" placeholder="VD: Flame Cavalier" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Sát Thương 60s (Triệu / M): *</label>
+                        <input id="hero-form-damage" type="number" step="0.001" placeholder="VD: 18.813" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-amber-400 font-gaming font-bold text-sm focus:outline-none focus:border-amber-400">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Số Sao (Star):</label>
+                        <select id="hero-form-star" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                            <option value="8">8★ (Thần Thường - Max Lv 90)</option>
+                            <option value="9">9★ (Thần Tối Thượng - Max Lv 100)</option>
+                            <option value="7">7★ (Bạch Kim)</option>
+                            <option value="6">6★ (Vàng)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Phân Hạng / Rank / Tier:</label>
+                        <input id="hero-form-tier" type="text" placeholder="VD: TIER S+, TIER S, PVP META" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-amber-400">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Huy Hiệu / Tags Nổi Bật (Ngăn cách bằng dấu • hoặc +):</label>
+                    <input id="hero-form-badge" type="text" placeholder="VD: TOP 1 META • MULTI-HIT • SET TĂNG DAME • DIỆT QUÁI HC" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Đường Dẫn Avatar Ảnh (Icon):</label>
+                    <input id="hero-form-avatar" type="text" placeholder="VD: http://103.143.208.18:8080/busidol_traffic/ELDORADO/ELDORADO_LG_traffic/image/ui/0_common/co_ch107.png" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-slate-300 focus:outline-none focus:border-amber-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Mô Tả / Review Chi Tiết:</label>
+                    <textarea id="hero-form-desc" rows="3" placeholder="Đánh giá ưu nhược điểm, độ hiệu quả trong chế độ 60s..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-amber-400"></textarea>
+                </div>
+            </div>
+
+            <!-- Footer Buttons -->
+            <div class="flex items-center justify-end gap-3 mt-5 pt-3 border-t border-slate-800">
+                <button onclick="closeHeroModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">
+                    Hủy
+                </button>
+                <button onclick="saveHeroForm()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-slate-950 text-xs font-black shadow-lg shadow-amber-500/25 transition">
+                    Lưu Tướng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= --><!-- ========================================================================= -->
+    <div id="review-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-slate-900 border-2 border-purple-500/80 rounded-2xl w-full max-w-lg shadow-2xl p-6 relative">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
+                <h3 id="modal-review-title" class="text-lg font-black text-purple-400 font-gaming uppercase">
+                    Quản Lý Card Đánh Giá Meta
+                </h3>
+                <button onclick="closeReviewModal()" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <div class="space-y-3.5 text-xs">
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Tiêu Đề Nhóm / Tướng: *</label>
+                    <input id="review-form-tag" type="text" placeholder="VD: TOP 1 - Flame Cavalier (18.8M)" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-400">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Phân Hạng / Tier:</label>
+                        <input id="review-form-tier" type="text" placeholder="VD: TIER S+, TIER S, PVP META" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-400">
+                    </div>
+                    <div>
+                        <label class="block text-slate-300 font-bold mb-1">Màu Sắc Card:</label>
+                        <select id="review-form-color" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-purple-400">
+                            <option value="amber">Vàng Kim (Top 1 Gold)</option>
+                            <option value="pink">Hồng Tím (Top 2 & 3 Pink)</option>
+                            <option value="teal">Xanh Mòng Két (PVP / Out Meta)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 font-bold mb-1">Nội Dung Đánh Giá (Hỗ trợ HTML tag như strong, span): *</label>
+                    <textarea id="review-form-text" rows="4" placeholder="Nhận xét độ bá đạo, bộ kỹ năng, tương tác trang bị..." class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2 text-slate-200 focus:outline-none focus:border-purple-400"></textarea>
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 mt-5 pt-3 border-t border-slate-800">
+                <button onclick="closeReviewModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold transition">
+                    Hủy
+                </button>
+                <button onclick="saveReviewForm()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-400 hover:to-indigo-500 text-white text-xs font-black shadow-lg shadow-purple-500/25 transition">
+                    Lưu Đánh Giá
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script imports -->
+    <script src="codex-data.js"></script>
+    <script src="app.js"></script>
+    <!-- ========================================================================= -->
+    <!-- MODAL: PHÓNG TO XEM CHI TIẾT TRANG BỊ ĐỘC QUYỀN                           -->
+    <!-- ========================================================================= -->
+    <div id="item-detail-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-overlay">
+        <div class="bg-slate-900 border-2 border-amber-500 rounded-2xl w-full max-w-md shadow-2xl p-6 relative">
+            <div class="flex items-start justify-between pb-3 border-b border-slate-800 mb-4">
+                <div class="flex items-center gap-3">
+                    <span id="item-modal-slot-icon" class="text-2xl">🛡️</span>
+                    <div>
+                        <h3 id="item-modal-name" class="text-lg font-black text-amber-300 font-gaming"></h3>
+                        <p id="item-modal-raw-name" class="text-xs text-slate-400 italic"></p>
+                    </div>
+                </div>
+                <button onclick="closeItemDetailModal()" class="text-slate-400 hover:text-white p-1 rounded-lg">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+
+            <!-- Item Showcase Box -->
+            <div class="flex flex-col items-center justify-center p-6 bg-slate-950 rounded-2xl border border-amber-500/30 mb-4 relative overflow-hidden group">
+                <div class="absolute inset-0 bg-gradient-to-b from-amber-500/10 via-transparent to-transparent pointer-events-none"></div>
+                <div class="w-32 h-32 flex items-center justify-center relative">
+                    <img id="item-modal-image" src="" alt="Item Image" class="w-full h-full object-contain filter drop-shadow-[0_0_15px_rgba(245,158,11,0.5)] transition transform group-hover:scale-110">
+                </div>
+                <div class="mt-3 flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-black text-xs border border-amber-400/50">Exclusive A-Grade Item</span>
+                    <span id="item-modal-slot" class="px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-200 font-bold text-xs"></span>
+                </div>
+            </div>
+
+            <!-- Stats & Description -->
+            <div class="space-y-3 text-xs mb-5">
+                <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800 flex items-center justify-between">
+                    <span class="text-slate-400 font-bold uppercase">Chỉ Số Cơ Bản:</span>
+                    <span id="item-modal-option" class="font-gaming text-amber-400 font-black text-base"></span>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800">
+                    <span class="text-slate-400 font-bold uppercase block mb-1">Mô Tả Trang Bị:</span>
+                    <p id="item-modal-desc" class="text-slate-300 leading-relaxed font-medium"></p>
+                </div>
+                <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center gap-2">
+                    <span class="text-amber-400 font-bold">Tướng Độc Quyền:</span>
+                    <span id="item-modal-hero" class="text-white font-extrabold"></span>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button onclick="closeItemDetailModal()" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-black text-xs transition shadow-lg shadow-amber-500/20">
+                    Đã Hiểu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAB 4: LIÊN HỆ (CONTACT) SECTION                                         -->
+    <!-- ========================================================================= -->
+    <section id="tab-content-contact" class="tab-content hidden flex-1 p-6 max-w-4xl mx-auto w-full">
+        <div class="text-center mb-10 mt-6">
+            <h2 class="text-3xl md:text-4xl font-black uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-500 font-gaming drop-shadow-[0_2px_15px_rgba(59,130,246,0.4)] mb-3">
+                📬 Liên Hệ & Cộng Đồng
+            </h2>
+            <p class="text-slate-400 text-sm max-w-xl mx-auto">Theo dõi kênh chính thức để cập nhật meta mới nhất, hướng dẫn build tướng, và tham gia cộng đồng El Dorado M.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <!-- Facebook -->
+            <a id="contact-facebook" href="https://www.facebook.com/minh.hung.63491/" target="_blank" rel="noopener noreferrer" class="group relative flex flex-col items-center gap-4 p-8 bg-slate-900/80 border border-slate-700/60 rounded-2xl hover:border-blue-500/60 hover:bg-blue-500/5 transition-all duration-300 shadow-lg hover:shadow-blue-500/10">
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-xl shadow-blue-500/25 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-black text-blue-400 uppercase tracking-wide mb-1">Facebook</h3>
+                    <p class="text-slate-500 text-xs font-semibold">Minh Hùng</p>
+                    <p class="text-slate-600 text-[11px] mt-2 italic">Facebook Chính Chủ</p>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div>
+            </a>
+
+            <!-- Discord -->
+            <a id="contact-discord" href="https://discord.com/user/chosenone_3667" target="_blank" rel="noopener noreferrer" class="group relative flex flex-col items-center gap-4 p-8 bg-slate-900/80 border border-slate-700/60 rounded-2xl hover:border-indigo-500/60 hover:bg-indigo-500/5 transition-all duration-300 shadow-lg hover:shadow-indigo-500/10">
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-xl shadow-indigo-500/25 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-black text-indigo-400 uppercase tracking-wide mb-1">Discord</h3>
+                    <p class="text-slate-500 text-xs font-semibold">chosenone_3667</p>
+                    <p class="text-slate-600 text-[11px] mt-2 italic">Liên hệ Discord</p>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></div>
+            </a>
+
+            <!-- YouTube -->
+            <a id="contact-youtube" href="https://www.youtube.com/@minhhung3667" target="_blank" rel="noopener noreferrer" class="group relative flex flex-col items-center gap-4 p-8 bg-slate-900/80 border border-slate-700/60 rounded-2xl hover:border-red-500/60 hover:bg-red-500/5 transition-all duration-300 shadow-lg hover:shadow-red-500/10">
+                <div class="w-20 h-20 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-xl shadow-red-500/25 group-hover:scale-110 transition-transform duration-300">
+                    <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-lg font-black text-red-400 uppercase tracking-wide mb-1">YouTube</h3>
+                    <p class="text-slate-500 text-xs font-semibold">Minh Hùng</p>
+                    <p class="text-slate-600 text-[11px] mt-2 italic">@minhhung3667</p>
+                </div>
+                <div class="absolute top-3 right-3 w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
+            </a>
+        </div>
+
+        <div class="mt-10 text-center p-6 bg-slate-900/50 border border-slate-800 rounded-2xl">
+            <p class="text-slate-500 text-xs font-semibold">
+                💡 Mua Hack Gold Tower Defence , El Dorado , Mod Vip AntiBan Liên Hệ Mô Tả
+            </p>
+        </div>
+    </section>
+
+    <!-- ========================================================================= -->
+    </div>
+
+</body>
+</html>
